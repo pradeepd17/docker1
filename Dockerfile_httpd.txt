@@ -1,0 +1,10 @@
+FROM centos:latest
+MAINTAINER app_rt
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum install httpd -y
+COPY source /opt/
+EXPOSE 80
+CMD ["echo","Hello, devops team"]
+ENTRYPOINT ["echo","This is a application team image"]
